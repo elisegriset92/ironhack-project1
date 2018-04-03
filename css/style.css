@@ -1,0 +1,57 @@
+body {
+  height: auto;
+  width: auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  background-image: url("../img/back.jpg");
+}
+/* Game Space */
+
+.first-canvas {
+  background-image: url('../img/background2.png');
+  background-position: center;
+  height: 500px;
+  width: 1000px;
+  float: left;
+}
+
+/* Snake */
+
+/* Food */
+
+/* Text, scores, levels */
+.description {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.center {
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+
+.btn {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.score {
+  padding: 15px 10px;
+  border: 2px solid greenyellow;
+  border-radius: 45%;
+  font-size: 20px;
+  background-color: greenyellow;
+  display: inline-flex;
+}
+
+.level {
+  padding: 15px 10px;
+  border: 2px solid olive;
+  border-radius: 45%;
+  font-size: 20px;
+  background-color: olive;
+  display: inline-flex;
+  float: left;
+}
