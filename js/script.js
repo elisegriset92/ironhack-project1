@@ -1,7 +1,31 @@
 var canvas = document.querySelector('.first-canvas');
 var ctx = canvas.getContext('2d');
 
-// Food collision
+// var for the game
+
+var test = false;
+
+var score = 0;
+var level = 1;
+var food = null;
+var snake = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  speed: 3,
+  dir: 'stop',
+  snakeSize: 20,
+  drawMe: function() {
+    ctx.fillRect(this.x, this.y, this.snakeSize, 20), (ctx.fillStyle =
+      'green'), ctx.fill();
+  },
+  eraseMe: function() {
+    ctx.clearRect(this.x, this.y, 20, 20);
+  },
+};
+
+// Function Init Game
+
+// Function Collision
 
 function getTop(obj) {
   return obj.y;
@@ -27,31 +51,12 @@ function collision(objA, objB) {
 
 function foodCollision() {
   var hasCollided = false;
-  if (collision(snake, food)) {
+  if (collision(food, snake)) {
     hasCollided = true;
   }
   return hasCollided;
 }
 
-// Draw Snake & Walls
-
-var snakeImage = new Image();
-snakeImage.src = './img/snake1.png';
-
-var snake = {
-  x: canvas.width / 2,
-  y: canvas.height / 2,
-  speed: 3,
-  dir: 'right',
-  drawMe: function() {
-    // ctx.drawImage(snakeImage, this.x, this.y, 100, 100);
-    ctx.fillRect(this.x, this.y, 20, 20), (ctx.fillStyle = 'green'), ctx.fill();
-    // ctx.fillRect(0, 0, 10, 800), (ctx.fillStyle = 'green'), ctx.fill();
-  },
-  eraseMe: function() {
-    ctx.clearRect(this.x, this.y, 20, 20);
-  },
-};
 // Draw food
 
 var foodImage = new Image();
@@ -62,22 +67,22 @@ function createFood(x, y) {
     x: x,
     y: y,
     drawFood: function() {
-      console.log('drawfood called');
       ctx.drawImage(foodImage, this.x, this.y, 50, 50);
     },
-    eraseFood: function() {
+    clearFood: function() {
+      // console.log('this is the function supposed to clear food');
       ctx.clearRect(this.x, this.y, 50, 50);
     },
   };
 }
 
-var food = null;
+// Draw Snake and moving
 
 function updateStuff() {
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // console.log('updatestuff is working');
   snake.eraseMe();
 
-  // Snake goes back from the wall
+  // Snake goes back from the wall - inside updateStuff()
 
   if (snake.x >= canvas.width) {
     snake.x = 0;
@@ -89,7 +94,7 @@ function updateStuff() {
     snake.y = canvas.height;
   }
 
-  // Snake turns;
+  // Snake turns - inside updateStuff()
 
   switch (snake.dir) {
     case 'right':
@@ -109,28 +114,40 @@ function updateStuff() {
       snake.y = snake.y;
       break;
   }
+
   snake.drawMe();
+
   if (food === null) {
-    console.log('after collision');
     food = createFood(
       Math.floor(Math.random() * canvas.width),
       Math.floor(Math.random() * canvas.height)
     );
-    food.drawFood();
   }
 
-  if (Math.random() * 0.9) {
-    console.log('collision');
-    food.eraseFood();
-    food = null;
+  food.drawFood();
+
+  // Level Up
+  // if ((level += 1)) {
+  //   snake.speed += 4;
+  // }
+
+  // Snakes grows
+  if (test) {
+    snake.snakeSize += 50;
   }
+
+  // foodCollision(snake, food);
+  // if (true) {
+  //   food.clearFood();
+  //   food = null;
+  // }
 
   requestAnimationFrame(function() {
     updateStuff();
   });
 }
 
-snake.onload = updateStuff();
+updateStuff();
 
 // Snake moves
 
@@ -162,5 +179,10 @@ $('body').keydown(function() {
 
     case 32:
       snake.dir = 'stop';
+      break;
+
+    case 49:
+      test = !test;
+      break;
   }
 });
