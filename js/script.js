@@ -1,7 +1,7 @@
 var canvas = document.querySelector('.first-canvas');
 var ctx = canvas.getContext('2d');
 
-// Function Init Game
+// _____________________________________Init Game____________________________________//
 
 function initGame() {
   $('.btn').off();
@@ -9,9 +9,7 @@ function initGame() {
   $('.btn').addClass('btn-clicked');
   $('.btn').text('Good Luck!');
 
-  // var for the game
-
-  var test = false;
+  // ____var for the game_____//
 
   var score = 0;
   var level = 1;
@@ -52,30 +50,30 @@ function initGame() {
           'green'), ctx.fill();
       }
     },
-    eraseMe: function() {
-      if (this.dir === 'down') {
-        ctx.clearRect(this.x + this.width, this.y, this.height, this.width);
-      } else if (this.dir === 'up') {
-        ctx.clearRect(
-          this.x + this.height,
-          this.y + this.height,
-          this.height,
-          this.width
-        );
-      } else if (this.dir === 'left') {
-        ctx.clearRect(
-          this.x + this.height,
-          this.y + this.width,
-          this.width,
-          this.height
-        );
-      } else {
-        ctx.clearRect(this.x, this.y, this.width, this.height);
-      }
-    },
+    // eraseMe: function() {
+    //   if (this.dir === 'down') {
+    //     ctx.clearRect(this.x + this.width, this.y, this.height, this.width);
+    //   } else if (this.dir === 'up') {
+    //     ctx.clearRect(
+    //       this.x + this.height,
+    //       this.y + this.height,
+    //       this.height,
+    //       this.width
+    //     );
+    //   } else if (this.dir === 'left') {
+    //     ctx.clearRect(
+    //       this.x + this.height,
+    //       this.y + this.width,
+    //       this.width,
+    //       this.height
+    //     );
+    //   } else {
+    //     ctx.clearRect(this.x, this.y, this.width, this.height);
+    //   }
+    // },
   };
 
-  // Draw food
+  // ____Draw Food_____//
 
   var foodImage = new Image();
   foodImage.src = './img/burger.png';
@@ -95,12 +93,7 @@ function initGame() {
     };
   }
 
-  // food = createFood(
-  //   Math.floor(Math.random() * canvas.width),
-  //   Math.floor(Math.random() * canvas.height)
-  // );
-
-  // Function Collision
+  // ____Collision_____//
 
   function getTop(obj) {
     return obj.y;
@@ -116,7 +109,6 @@ function initGame() {
   }
 
   function collision(objA, objB) {
-    // console.log('collision');
     return (
       getBottom(objA) >= getTop(objB) &&
       getTop(objA) <= getBottom(objB) &&
@@ -133,11 +125,13 @@ function initGame() {
     return hasCollided;
   }
 
+  // ______________________________________UPDATE STUFF___________________________________________//
+
   function updateStuff() {
-    snake.eraseMe();
+    // snake.eraseMe();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Snake goes back from the wall - inside updateStuff()
-
+    // _______Snake goes back from the wall - inside updateStuff()______//
     if (snake.x >= canvas.width) {
       snake.x = 0;
     } else if (snake.x <= 0) {
@@ -148,7 +142,7 @@ function initGame() {
       snake.y = canvas.height;
     }
 
-    // Snake turns - inside updateStuff()
+    // ______Snake turns - inside updateStuff()_____//
 
     switch (snake.dir) {
       case 'right':
@@ -170,7 +164,7 @@ function initGame() {
     }
     snake.drawMe();
 
-    // food.drawFood();
+    // ____Draw Food is called_____//
 
     if (food === null) {
       food = createFood(
@@ -180,7 +174,8 @@ function initGame() {
     }
     food.drawFood();
 
-    // Level Up
+    // ______Level Up_______//
+
     // function levelUp() {
     //   if ((level += 1)) {
     //     snake.speed += 4;
@@ -191,23 +186,24 @@ function initGame() {
       food.clearFood();
       food = null;
       snake.width += 50;
-
-      console.log('foodCollision');
+      score += 1;
+      console.log(score);
     }
 
-    // Snakes grows
-    if (test) {
-      snake.snakeSize += 50;
+    // ______Score_______//
+
+    function getScore() {
+      return score;
     }
+    getScore();
 
     requestAnimationFrame(function() {
       updateStuff();
     });
   }
-
   updateStuff();
 
-  // Snake moves
+  // ______Keyboard cases_______//
 
   $('body').keydown(function() {
     switch (event.keyCode) {
