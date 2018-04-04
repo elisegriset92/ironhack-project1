@@ -26,10 +26,9 @@ body {
   padding-bottom: 20px;
 }
 
-.center {
-  width: auto;
-  height: auto;
+.points {
   text-align: center;
+  overflow: auto;
 }
 
 .btn {
@@ -53,5 +52,4 @@ body {
   font-size: 20px;
   background-color: olive;
   display: inline-flex;
-  float: left;
 }

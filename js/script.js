@@ -49,14 +49,6 @@ function collision(objA, objB) {
   );
 }
 
-function foodCollision() {
-  var hasCollided = false;
-  if (collision(food, snake)) {
-    hasCollided = true;
-  }
-  return hasCollided;
-}
-
 // Draw food
 
 var foodImage = new Image();
@@ -136,11 +128,15 @@ function updateStuff() {
     snake.snakeSize += 50;
   }
 
-  // foodCollision(snake, food);
-  // if (true) {
-  //   food.clearFood();
-  //   food = null;
-  // }
+  function foodCollision() {
+    var hasCollided = false;
+    if (collision(snakeImage, foodImage)) {
+      hasCollided = true;
+      food.clearFood();
+      food = null;
+    }
+    return hasCollided;
+  }
 
   requestAnimationFrame(function() {
     updateStuff();
