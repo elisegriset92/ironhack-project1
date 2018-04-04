@@ -50,6 +50,7 @@ function initGame() {
           'green'), ctx.fill();
       }
     },
+
     // eraseMe: function() {
     //   if (this.dir === 'down') {
     //     ctx.clearRect(this.x + this.width, this.y, this.height, this.width);
@@ -168,34 +169,27 @@ function initGame() {
 
     if (food === null) {
       food = createFood(
-        Math.floor(Math.random() * canvas.width),
-        Math.floor(Math.random() * canvas.height)
+        Math.floor(Math.random() * (canvas.width - 20)),
+        Math.floor(Math.random() * (canvas.height - 20))
       );
     }
     food.drawFood();
-
-    // ______Level Up_______//
-
-    // function levelUp() {
-    //   if ((level += 1)) {
-    //     snake.speed += 4;
-    //   }
-    // }
 
     if (foodCollision()) {
       food.clearFood();
       food = null;
       snake.width += 50;
       score += 1;
-      console.log(score);
+      $('.score').text(score + ' PTS');
     }
 
-    // ______Score_______//
+    // ______Level Up_______//
 
-    function getScore() {
-      return score;
+    function levelUp() {
+      if ((level += 1)) {
+        snake.speed += 4;
+      }
     }
-    getScore();
 
     requestAnimationFrame(function() {
       updateStuff();

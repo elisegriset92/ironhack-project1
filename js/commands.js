@@ -5,11 +5,4 @@ $(document).ready(function() {
   });
 
   $('.level').text;
-
-  $('.score').text(score);
-  function foundMatchingBlocks(event, params) {
-    params.elements.remove();
-    score += 100;
-    $('.score').text(score);
-  }
 });
