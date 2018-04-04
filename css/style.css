@@ -24,6 +24,7 @@ body {
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  /* transition: width 2s, height 2s, background-color 2s, transform 2s; */
 }
 
 .points {
@@ -35,6 +36,16 @@ body {
   width: 300px;
   margin: 0 auto;
 }
+
+.btn-clicked {
+  background-color: red;
+  color: white;
+}
+
+/* .description:hover {
+  background-color: red;
+  transform: rotate(360deg);
+} */
 
 .score {
   padding: 15px 10px;

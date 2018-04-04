@@ -1,2 +1,8 @@
-// $('.btn').click(function(){
-//   $('first-canvas').L= ('right')}
+$(document).ready(function() {
+  $('.btn').click(function() {
+    initGame();
+    console.log('init');
+  });
+
+  $('.level').text;
+});
