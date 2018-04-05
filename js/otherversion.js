@@ -79,8 +79,8 @@ function initGame() {
     return {
       x: x,
       y: y,
-      width: 50,
-      height: 50,
+      width: 80,
+      height: 80,
       drawFood: function() {
         ctx.drawImage(foodImage2, this.x, this.y, this.width, this.height);
       },
@@ -144,8 +144,8 @@ function initGame() {
   };
 
   var wall_2 = {
-    x: 0,
-    y: canvas.width,
+    x: canvas.width,
+    y: 0,
     width: 25,
     height: canvas.height,
     drawWalls: function() {
@@ -157,8 +157,8 @@ function initGame() {
   var wall_3 = {
     x: 0,
     y: 0,
-    width: 25,
-    height: canvas.width,
+    width: canvas.width,
+    height: 25,
     drawWalls: function() {
       ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
         'red'), ctx.fill();
@@ -166,10 +166,10 @@ function initGame() {
   };
 
   var wall_4 = {
-    x: 0,
-    y: 0,
-    width: 25,
-    height: canvas.width,
+    x: canvas.height,
+    y: canvas.height,
+    width: canvas.width,
+    height: 25,
     drawWalls: function() {
       ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
         'red'), ctx.fill();
@@ -322,6 +322,7 @@ function initGame() {
 
     if (snakeHead.level === 2) {
       wall_1.drawWalls();
+      wall_2.drawWalls();
     }
 
     if (snakeHead.level === 3) {
