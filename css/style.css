@@ -24,6 +24,22 @@ body {
   width: 1000px;
 }
 
+.background3 {
+  background-image: url('../img/background3.png');
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  width: 1000px;
+}
+
+.background4 {
+  background-image: url('../img/background4.png');
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  width: 1000px;
+}
+
 /* Snake */
 
 /* Food */

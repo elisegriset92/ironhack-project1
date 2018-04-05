@@ -13,17 +13,6 @@ function initGame() {
 
   var food = null;
 
-  var snake = [];
-  var snakeBody = {
-    x: 12,
-    y: 13,
-    width: 20,
-    height: 20,
-    drawBody: function() {
-      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-        'red'), ctx.fill();
-    },
-  };
   var snakeHead = {
     x: canvas.width / 2,
     y: canvas.height / 2,
@@ -61,29 +50,131 @@ function initGame() {
       }
     },
   };
+  // ____Draw Food__TACO___//
 
-  snake.push(snakeHead);
-  console.log(snake);
+  var foodImage1 = new Image();
+  foodImage1.src = './img/taco.png';
 
-  // ____Draw Food_____//
-
-  var foodImage = new Image();
-  foodImage.src = './img/burger.png';
-
-  function createFood(x, y) {
+  function createTaco(x, y) {
     return {
       x: x,
       y: y,
-      width: 50,
-      height: 50,
+      width: 80,
+      height: 80,
       drawFood: function() {
-        ctx.drawImage(foodImage, this.x, this.y, this.width, this.height);
+        ctx.drawImage(foodImage1, this.x, this.y, this.width, this.height);
       },
       clearFood: function() {
         ctx.clearRect(this.x, this.y, this.width, this.height);
       },
     };
   }
+
+  // ____Draw Food__LOBSTER___//
+
+  var foodImage2 = new Image();
+  foodImage2.src = './img/lobster.png';
+
+  function createLobster(x, y) {
+    return {
+      x: x,
+      y: y,
+      width: 50,
+      height: 50,
+      drawFood: function() {
+        ctx.drawImage(foodImage2, this.x, this.y, this.width, this.height);
+      },
+      clearFood: function() {
+        ctx.clearRect(this.x, this.y, this.width, this.height);
+      },
+    };
+  }
+
+  // ____Draw Food__BURGER___//
+
+  var foodImage3 = new Image();
+  foodImage3.src = './img/burger.png';
+
+  function createBurger(x, y) {
+    return {
+      x: x,
+      y: y,
+      width: 50,
+      height: 50,
+      drawFood: function() {
+        ctx.drawImage(foodImage3, this.x, this.y, this.width, this.height);
+      },
+      clearFood: function() {
+        ctx.clearRect(this.x, this.y, this.width, this.height);
+      },
+    };
+  }
+
+  // ____Draw Food__PIZZA___//
+
+  var foodImage4 = new Image();
+  foodImage4.src = './img/pizza.png';
+
+  function createPizza(x, y) {
+    return {
+      x: x,
+      y: y,
+      width: 50,
+      height: 50,
+      drawFood: function() {
+        ctx.drawImage(foodImage3, this.x, this.y, this.width, this.height);
+      },
+      clearFood: function() {
+        ctx.clearRect(this.x, this.y, this.width, this.height);
+      },
+    };
+  }
+
+  // ____Draw Walls___If time, create a function for this__//
+
+  var wall_1 = {
+    x: 0,
+    y: 0,
+    width: 25,
+    height: canvas.width,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
+
+  var wall_2 = {
+    x: 0,
+    y: canvas.width,
+    width: 25,
+    height: canvas.height,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
+
+  var wall_3 = {
+    x: 0,
+    y: 0,
+    width: 25,
+    height: canvas.width,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
+
+  var wall_4 = {
+    x: 0,
+    y: 0,
+    width: 25,
+    height: canvas.width,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
 
   // ____Collision_____//
 
@@ -109,9 +200,25 @@ function initGame() {
     );
   }
 
+  // __________Food Collision___________//
+
   function foodCollision() {
     var hasCollided = false;
     if (collision(snakeHead, food)) {
+      hasCollided = true;
+    }
+    return hasCollided;
+  }
+  // __________Walls Collision___________//
+
+  function wallCollision() {
+    var hasCollided = false;
+    if (
+      collision(snakeHead, wall_1) ||
+      collision(snakeHead, wall_2) ||
+      collision(snakeHead, wall_3) ||
+      collision(snakeHead, wall_4)
+    ) {
       hasCollided = true;
     }
     return hasCollided;
@@ -159,7 +266,7 @@ function initGame() {
     // ____Draw Food is called_____//
 
     if (food === null) {
-      food = createFood(
+      food = createTaco(
         Math.floor(Math.random() * (canvas.width - 20)),
         Math.floor(Math.random() * (canvas.height - 20))
       );
@@ -169,23 +276,68 @@ function initGame() {
     if (foodCollision()) {
       food.clearFood();
       food = null;
-      snakeBody.drawBody();
       snakeHead.score += 1;
       $('.score').text(snakeHead.score + ' PTS');
-      if (snakeHead.score === 2) {
+
+      if (snakeHead.score === 1) {
+        if (food === null) {
+          food = createLobster(
+            Math.floor(Math.random() * (canvas.width - 20)),
+            Math.floor(Math.random() * (canvas.height - 20))
+          );
+        }
+        food.drawFood();
         snakeHead.level += 1;
         snakeHead.speed += 2;
-        console.log(snakeHead.speed);
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background2');
+      } else if (snakeHead.score === 3) {
+        if (food === null) {
+          food = createBurger(
+            Math.floor(Math.random() * (canvas.width - 20)),
+            Math.floor(Math.random() * (canvas.height - 20))
+          );
+        }
+        food.drawFood();
+        snakeHead.level += 1;
+        snakeHead.speed += 2;
+        $('.level').text('LEVEL ' + snakeHead.level);
+        $('.first-canvas').addClass('background3');
+      } else if (snakeHead.score === 5) {
+        if (food === null) {
+          food = createPizza(
+            Math.floor(Math.random() * (canvas.width - 20)),
+            Math.floor(Math.random() * (canvas.height - 20))
+          );
+        }
+        food.drawFood();
+        snakeHead.level += 1;
+        snakeHead.speed += 2;
+        $('.level').text('LEVEL ' + snakeHead.level);
+        $('.first-canvas').addClass('background4');
       }
     }
 
-    // ______Level Up_______//
+    if (snakeHead.level === 2) {
+      wall_1.drawWalls();
+    }
 
-    // if (snakeHead.score === 10){
-    //   window.location.href = "index2.html"
-    // }
+    if (snakeHead.level === 3) {
+      wall_1.drawWalls();
+      wall_2.drawWalls();
+    }
+
+    if (snakeHead.level === 4) {
+      wall_1.drawWalls();
+      wall_2.drawWalls();
+      wall_3.drawWalls();
+      wall_4.drawWalls();
+    }
+
+    if (wallCollision()) {
+      alert('Game over!');
+      location.reload();
+    }
 
     requestAnimationFrame(function() {
       updateStuff();
