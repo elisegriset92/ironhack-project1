@@ -169,7 +169,7 @@ function initGame() {
     if (foodCollision()) {
       food.clearFood();
       food = null;
-      snake.push(snakeBody);
+      snakeBody.drawBody();
       snakeHead.score += 1;
       $('.score').text(snakeHead.score + ' PTS');
       if (snakeHead.score === 2) {
@@ -177,16 +177,14 @@ function initGame() {
         snakeHead.speed += 2;
         console.log(snakeHead.speed);
         $('.level').text('LEVEL ' + snakeHead.level);
+        $('.first-canvas').addClass('background2');
       }
     }
 
     // ______Level Up_______//
 
-    // if (snakeHead.score === 2) {
-    //   snakeHead.level += 1;
-    //   snakeHead.speed += 2;
-    //   console.log(snakeHead.speed);
-    //   $('.level').text('LEVEL ' + snakeHead.level);
+    // if (snakeHead.score === 10){
+    //   window.location.href = "index2.html"
     // }
 
     requestAnimationFrame(function() {

@@ -10,9 +10,18 @@ body {
 .first-canvas {
   background-image: url('../img/background2.png');
   background-position: center;
+  background-size: cover;
   height: 500px;
   width: 1000px;
   float: left;
+}
+
+.background2 {
+  background-image: url('../img/background1.png');
+  background-position: center;
+  background-size: cover;
+  height: 500px;
+  width: 1000px;
 }
 
 /* Snake */
