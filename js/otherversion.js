@@ -119,10 +119,10 @@ function initGame() {
     return {
       x: x,
       y: y,
-      width: 50,
-      height: 50,
+      width: 300,
+      height: 300,
       drawFood: function() {
-        ctx.drawImage(foodImage3, this.x, this.y, this.width, this.height);
+        ctx.drawImage(foodImage4, this.x, this.y, this.width, this.height);
       },
       clearFood: function() {
         ctx.clearRect(this.x, this.y, this.width, this.height);
@@ -279,7 +279,7 @@ function initGame() {
       snakeHead.score += 1;
       $('.score').text(snakeHead.score + ' PTS');
 
-      if (snakeHead.score === 1) {
+      if (snakeHead.score === 5) {
         if (food === null) {
           food = createLobster(
             Math.floor(Math.random() * (canvas.width - 20)),
@@ -291,7 +291,7 @@ function initGame() {
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background2');
-      } else if (snakeHead.score === 3) {
+      } else if (snakeHead.score === 10) {
         if (food === null) {
           food = createBurger(
             Math.floor(Math.random() * (canvas.width - 20)),
@@ -303,7 +303,7 @@ function initGame() {
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background3');
-      } else if (snakeHead.score === 5) {
+      } else if (snakeHead.score === 15) {
         if (food === null) {
           food = createPizza(
             Math.floor(Math.random() * (canvas.width - 20)),
@@ -316,6 +316,8 @@ function initGame() {
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background4');
       }
+      // else {food.clearFood();
+      // }
     }
 
     if (snakeHead.level === 2) {
