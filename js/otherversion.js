@@ -29,24 +29,24 @@ function initGame() {
           this.y - this.width + this.height,
           this.height,
           this.width
-        ), (ctx.fillStyle = 'green'), ctx.fill();
+        ), (ctx.fillStyle = '#6E4DEF'), ctx.fill();
       } else if (this.dir === 'up') {
         ctx.fillRect(
           this.x + this.height,
           this.y + this.height,
           this.height,
           this.width
-        ), (ctx.fillStyle = 'green'), ctx.fill();
+        ), (ctx.fillStyle = '#6E4DEF'), ctx.fill();
       } else if (this.dir === 'left') {
         ctx.fillRect(
           this.x + this.height,
           this.y + this.width,
           this.width,
           this.height
-        ), (ctx.fillStyle = 'green'), ctx.fill();
+        ), (ctx.fillStyle = '#6E4DEF'), ctx.fill();
       } else {
         ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-          'green'), ctx.fill();
+          '#6E4DEF'), ctx.fill();
       }
     },
   };
@@ -132,49 +132,49 @@ function initGame() {
 
   // ____Draw Walls___If time, create a function for this__//
 
-  // var wall_1 = {
-  //   x: 0,
-  //   y: 0,
-  //   width: 25,
-  //   height: canvas.width,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'red'), ctx.fill();
-  //   },
-  // };
+  var wall_1 = {
+    x: 0,
+    y: 0,
+    width: 25,
+    height: canvas.width,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
 
-  // var wall_2 = {
-  //   x: canvas.width,
-  //   y: canvas.height,
-  //   width: 25,
-  //   height: canvas.height,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'red'), ctx.fill();
-  //   },
-  // };
+  var wall_2 = {
+    x: canvas.width - 25,
+    y: 0,
+    width: 25,
+    height: canvas.height,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
 
-  // var wall_3 = {
-  //   x: 0,
-  //   y: 0,
-  //   width: canvas.width,
-  //   height: 25,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'red'), ctx.fill();
-  //   },
-  // };
+  var wall_3 = {
+    x: 0,
+    y: 0,
+    width: canvas.width,
+    height: 25,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
 
-  // var wall_4 = {
-  //   x: canvas.height,
-  //   y: canvas.height,
-  //   width: canvas.width,
-  //   height: 25,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'red'), ctx.fill();
-  //   },
-  // };
+  var wall_4 = {
+    x: 0,
+    y: canvas.height - 25,
+    width: canvas.width,
+    height: 25,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
 
   // ____Collision_____//
 
@@ -265,7 +265,7 @@ function initGame() {
 
     // ____Keep Score and Levels___//
 
-    for (var i = snakeHead.score; i < 30; i++) {
+    for (var i = snakeHead.score; i < 25; i++) {
       if (i < 5) {
         snakeHead.level = 1;
       } else if (i < 10) {
@@ -281,8 +281,8 @@ function initGame() {
 
     if (food === null && snakeHead.score < 5) {
       food = createTaco(
-        Math.floor(Math.random() * (canvas.width - 20)),
-        Math.floor(Math.random() * (canvas.height - 20))
+        Math.floor(Math.random() * (canvas.width - 100)),
+        Math.floor(Math.random() * (canvas.height - 100))
       );
     }
     food.drawFood();
@@ -297,8 +297,8 @@ function initGame() {
 
       if (food === null && snakeHead.score >= 5 && snakeHead.score < 10) {
         food = createLobster(
-          Math.floor(Math.random() * (canvas.width - 20)),
-          Math.floor(Math.random() * (canvas.height - 20))
+          Math.floor(Math.random() * (canvas.width - 100)),
+          Math.floor(Math.random() * (canvas.height - 100))
         );
         food.drawFood();
         snakeHead.speed = 5;
@@ -311,8 +311,8 @@ function initGame() {
         snakeHead.score < 15
       ) {
         food = createBurger(
-          Math.floor(Math.random() * (canvas.width - 20)),
-          Math.floor(Math.random() * (canvas.height - 20))
+          Math.floor(Math.random() * (canvas.width - 100)),
+          Math.floor(Math.random() * (canvas.height - 100))
         );
         food.drawFood();
         snakeHead.speed = 7;
@@ -322,41 +322,43 @@ function initGame() {
       } else if (
         food === null &&
         snakeHead.score >= 15 &&
-        snakeHead.score < 30
+        snakeHead.score < 21
       ) {
         food = createPizza(
-          Math.floor(Math.random() * (canvas.width - 20)),
-          Math.floor(Math.random() * (canvas.height - 20))
+          Math.floor(Math.random() * (canvas.width - 100)),
+          Math.floor(Math.random() * (canvas.height - 100))
         );
         food.drawFood();
         snakeHead.speed = 9;
         snakeHead.level = 4;
         $('.first-canvas').addClass('background4');
         $('.level').text('LEVEL ' + snakeHead.level);
+      } else if (snakeHead.score === 20) {
+        alert('YEAHHHHHH PIZZA !!!');
       }
     }
 
-    // if (snakeHead.level >= 2) {
-    //   wall_1.drawWalls();
-    //   wall_2.drawWalls();
-    // }
+    if (snakeHead.level === 2) {
+      wall_1.drawWalls();
+      wall_3.drawWalls();
+    }
 
-    // if (snakeHead.level >= 3) {
-    //   wall_3.drawWalls();
-    //   wall_4.drawWalls();
-    // }
+    if (snakeHead.level === 3) {
+      wall_2.drawWalls();
+      wall_4.drawWalls();
+    }
 
-    // if (snakeHead.level >= 4) {
-    //   wall_1.drawWalls();
-    //   wall_2.drawWalls();
-    //   wall_3.drawWalls();
-    //   wall_4.drawWalls();
-    // }
+    if (snakeHead.level === 4) {
+      wall_1.drawWalls();
+      wall_2.drawWalls();
+      wall_3.drawWalls();
+      wall_4.drawWalls();
+    }
 
-    // if (wallCollision()) {
-    //   alert('Game over!');
-    //   location.reload();
-    // }
+    if (wallCollision()) {
+      alert('Game over!');
+      location.reload();
+    }
 
     requestAnimationFrame(function() {
       updateStuff();
