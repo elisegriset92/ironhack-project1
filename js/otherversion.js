@@ -11,14 +11,25 @@ function initGame() {
 
   // ____var for the game_____//
 
-  var score = 0;
-  var level = 1;
   var food = null;
 
-  var snake = {
+  var snake = [];
+  var snakeBody = {
+    x: 12,
+    y: 13,
+    width: 20,
+    height: 20,
+    drawBody: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'red'), ctx.fill();
+    },
+  };
+  var snakeHead = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     speed: 3,
+    score: 0,
+    level: 1,
     dir: 'right',
     width: 20,
     height: 20,
@@ -50,6 +61,9 @@ function initGame() {
       }
     },
   };
+
+  snake.push(snakeHead);
+  console.log(snake);
 
   // ____Draw Food_____//
 
@@ -97,7 +111,7 @@ function initGame() {
 
   function foodCollision() {
     var hasCollided = false;
-    if (collision(snake, food)) {
+    if (collision(snakeHead, food)) {
       hasCollided = true;
     }
     return hasCollided;
@@ -110,37 +124,37 @@ function initGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // _______Snake goes back from the wall - inside updateStuff()______//
-    if (snake.x >= canvas.width) {
-      snake.x = 0;
-    } else if (snake.x <= 0) {
-      snake.x = canvas.width;
-    } else if (snake.y >= canvas.height) {
-      snake.y = 0;
-    } else if (snake.y <= 0) {
-      snake.y = canvas.height;
+    if (snakeHead.x >= canvas.width) {
+      snakeHead.x = 0;
+    } else if (snakeHead.x <= 0) {
+      snakeHead.x = canvas.width;
+    } else if (snakeHead.y >= canvas.height) {
+      snakeHead.y = 0;
+    } else if (snakeHead.y <= 0) {
+      snakeHead.y = canvas.height;
     }
 
     // ______Snake turns - inside updateStuff()_____//
 
-    switch (snake.dir) {
+    switch (snakeHead.dir) {
       case 'right':
-        snake.x += snake.speed;
+        snakeHead.x += snakeHead.speed;
         break;
       case 'left':
-        snake.x -= snake.speed;
+        snakeHead.x -= snakeHead.speed;
         break;
       case 'up':
-        snake.y -= snake.speed;
+        snakeHead.y -= snakeHead.speed;
         break;
       case 'down':
-        snake.y += snake.speed;
+        snakeHead.y += snakeHead.speed;
         break;
       case 'stop':
-        snake.x = snake.x;
-        snake.y = snake.y;
+        snakeHead.x = snakeHead.x;
+        snakeHead.y = snakeHead.y;
         break;
     }
-    snake.drawMe();
+    snakeHead.drawMe();
 
     // ____Draw Food is called_____//
 
@@ -155,21 +169,25 @@ function initGame() {
     if (foodCollision()) {
       food.clearFood();
       food = null;
-      snake.width += 50;
-      score += 1;
-      $('.score').text(score + ' PTS');
+      snake.push(snakeBody);
+      snakeHead.score += 1;
+      $('.score').text(snakeHead.score + ' PTS');
+      if (snakeHead.score === 2) {
+        snakeHead.level += 1;
+        snakeHead.speed += 2;
+        console.log(snakeHead.speed);
+        $('.level').text('LEVEL ' + snakeHead.level);
+      }
     }
 
     // ______Level Up_______//
 
-    // function levelUp(score){
-    // if (score === 2) {
-    //   level += 1;
-    //   $('.level').text('Level ' + level);
-    //   break};
+    // if (snakeHead.score === 2) {
+    //   snakeHead.level += 1;
+    //   snakeHead.speed += 2;
+    //   console.log(snakeHead.speed);
+    //   $('.level').text('LEVEL ' + snakeHead.level);
     // }
-
-    // snake.speed += 2;
 
     requestAnimationFrame(function() {
       updateStuff();
@@ -182,31 +200,31 @@ function initGame() {
   $('body').keydown(function() {
     switch (event.keyCode) {
       case 39:
-        if (snake.dir !== 'left') {
-          snake.dir = 'right';
+        if (snakeHead.dir !== 'left') {
+          snakeHead.dir = 'right';
           break;
         }
 
       case 37:
-        if (snake.dir !== 'right') {
-          snake.dir = 'left';
+        if (snakeHead.dir !== 'right') {
+          snakeHead.dir = 'left';
           break;
         }
 
       case 40:
-        if (snake.dir !== 'up') {
-          snake.dir = 'down';
+        if (snakeHead.dir !== 'up') {
+          snakeHead.dir = 'down';
           break;
         }
 
       case 38:
-        if (snake.dir !== 'down') {
-          snake.dir = 'up';
+        if (snakeHead.dir !== 'down') {
+          snakeHead.dir = 'up';
           break;
         }
 
       case 32:
-        snake.dir = 'stop';
+        snakeHead.dir = 'stop';
         break;
 
       case 49:

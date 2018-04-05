@@ -3,6 +3,4 @@ $(document).ready(function() {
     initGame();
     console.log('init');
   });
-
-  $('.level').text;
 });
