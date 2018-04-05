@@ -263,9 +263,23 @@ function initGame() {
     }
     snakeHead.drawMe();
 
+    // ____Keep Score and Levels___//
+
+    for (var i = snakeHead.score; i < 30; i++) {
+      if (i < 5) {
+        snakeHead.level = 1;
+      } else if (i < 10) {
+        snakeHead.level = 2;
+      } else if (i < 15) {
+        snakeHead.level = 3;
+      } else if (i > 15) {
+        snakeHead.level = 4;
+      }
+    }
+
     // ____Draw Food is called_____//
 
-    if (food === null && snakeHead.score < 2) {
+    if (food === null && snakeHead.score < 5) {
       food = createTaco(
         Math.floor(Math.random() * (canvas.width - 20)),
         Math.floor(Math.random() * (canvas.height - 20))
@@ -277,35 +291,37 @@ function initGame() {
       food.clearFood();
       food = null;
       snakeHead.score += 1;
+      snakeHead.level = 1;
       $('.score').text(snakeHead.score + ' PTS');
+      $('.level').text('LEVEL ' + snakeHead.level);
 
-      if (food === null && snakeHead.score >= 2 && snakeHead.score < 10) {
+      if (food === null && snakeHead.score >= 5 && snakeHead.score < 10) {
         food = createLobster(
           Math.floor(Math.random() * (canvas.width - 20)),
           Math.floor(Math.random() * (canvas.height - 20))
         );
         food.drawFood();
-        snakeHead.level += 1;
-        snakeHead.speed += 2;
-        $('.level').text('LEVEL ' + snakeHead.level);
+        snakeHead.speed = 5;
+        snakeHead.level = 2;
         $('.first-canvas').addClass('background2');
+        $('.level').text('LEVEL ' + snakeHead.level);
       } else if (
         food === null &&
-        snakeHead.score === 10 &&
-        snakeHead.score < 20
+        snakeHead.score >= 10 &&
+        snakeHead.score < 15
       ) {
         food = createBurger(
           Math.floor(Math.random() * (canvas.width - 20)),
           Math.floor(Math.random() * (canvas.height - 20))
         );
         food.drawFood();
-        snakeHead.level += 1;
-        snakeHead.speed += 2;
-        $('.level').text('LEVEL ' + snakeHead.level);
+        snakeHead.speed = 7;
+        snakeHead.level = 3;
         $('.first-canvas').addClass('background3');
+        $('.level').text('LEVEL ' + snakeHead.level);
       } else if (
         food === null &&
-        snakeHead.score >= 20 &&
+        snakeHead.score >= 15 &&
         snakeHead.score < 30
       ) {
         food = createPizza(
@@ -313,10 +329,10 @@ function initGame() {
           Math.floor(Math.random() * (canvas.height - 20))
         );
         food.drawFood();
-        snakeHead.level += 1;
-        snakeHead.speed += 2;
-        $('.level').text('LEVEL ' + snakeHead.level);
+        snakeHead.speed = 9;
+        snakeHead.level = 4;
         $('.first-canvas').addClass('background4');
+        $('.level').text('LEVEL ' + snakeHead.level);
       }
     }
 
