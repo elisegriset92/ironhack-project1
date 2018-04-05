@@ -132,49 +132,49 @@ function initGame() {
 
   // ____Draw Walls___If time, create a function for this__//
 
-  var wall_1 = {
-    x: 0,
-    y: 0,
-    width: 25,
-    height: canvas.width,
-    drawWalls: function() {
-      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-        'red'), ctx.fill();
-    },
-  };
+  // var wall_1 = {
+  //   x: 0,
+  //   y: 0,
+  //   width: 25,
+  //   height: canvas.width,
+  //   drawWalls: function() {
+  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+  //       'red'), ctx.fill();
+  //   },
+  // };
 
-  var wall_2 = {
-    x: 0,
-    y: canvas.width,
-    width: 25,
-    height: canvas.height,
-    drawWalls: function() {
-      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-        'red'), ctx.fill();
-    },
-  };
+  // var wall_2 = {
+  //   x: canvas.width,
+  //   y: canvas.height,
+  //   width: 25,
+  //   height: canvas.height,
+  //   drawWalls: function() {
+  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+  //       'red'), ctx.fill();
+  //   },
+  // };
 
-  var wall_3 = {
-    x: 0,
-    y: 0,
-    width: canvas.width,
-    height: 25,
-    drawWalls: function() {
-      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-        'red'), ctx.fill();
-    },
-  };
+  // var wall_3 = {
+  //   x: 0,
+  //   y: 0,
+  //   width: canvas.width,
+  //   height: 25,
+  //   drawWalls: function() {
+  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+  //       'red'), ctx.fill();
+  //   },
+  // };
 
-  var wall_4 = {
-    x: canvas.height,
-    y: canvas.height,
-    width: canvas.width,
-    height: 25,
-    drawWalls: function() {
-      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-        'red'), ctx.fill();
-    },
-  };
+  // var wall_4 = {
+  //   x: canvas.height,
+  //   y: canvas.height,
+  //   width: canvas.width,
+  //   height: 25,
+  //   drawWalls: function() {
+  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+  //       'red'), ctx.fill();
+  //   },
+  // };
 
   // ____Collision_____//
 
@@ -279,7 +279,7 @@ function initGame() {
       snakeHead.score += 1;
       $('.score').text(snakeHead.score + ' PTS');
 
-      if (food === null && snakeHead.score >= 2 && snakeHead.score < 4) {
+      if (food === null && snakeHead.score >= 2 && snakeHead.score < 10) {
         food = createLobster(
           Math.floor(Math.random() * (canvas.width - 20)),
           Math.floor(Math.random() * (canvas.height - 20))
@@ -291,8 +291,8 @@ function initGame() {
         $('.first-canvas').addClass('background2');
       } else if (
         food === null &&
-        snakeHead.score === 4 &&
-        snakeHead.score < 6
+        snakeHead.score === 10 &&
+        snakeHead.score < 20
       ) {
         food = createBurger(
           Math.floor(Math.random() * (canvas.width - 20)),
@@ -303,7 +303,11 @@ function initGame() {
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background3');
-      } else if (food === null && snakeHead.score >= 6 && snakeHead.score < 4) {
+      } else if (
+        food === null &&
+        snakeHead.score >= 20 &&
+        snakeHead.score < 30
+      ) {
         food = createPizza(
           Math.floor(Math.random() * (canvas.width - 20)),
           Math.floor(Math.random() * (canvas.height - 20))
@@ -316,15 +320,15 @@ function initGame() {
       }
     }
 
-    if (snakeHead.level >= 2) {
-      wall_1.drawWalls();
-      wall_2.drawWalls();
-    }
+    // if (snakeHead.level >= 2) {
+    //   wall_1.drawWalls();
+    //   wall_2.drawWalls();
+    // }
 
-    if (snakeHead.level >= 3) {
-      wall_3.drawWalls();
-      wall_4.drawWalls();
-    }
+    // if (snakeHead.level >= 3) {
+    //   wall_3.drawWalls();
+    //   wall_4.drawWalls();
+    // }
 
     // if (snakeHead.level >= 4) {
     //   wall_1.drawWalls();
@@ -333,10 +337,10 @@ function initGame() {
     //   wall_4.drawWalls();
     // }
 
-    if (wallCollision()) {
-      alert('Game over!');
-      location.reload();
-    }
+    // if (wallCollision()) {
+    //   alert('Game over!');
+    //   location.reload();
+    // }
 
     requestAnimationFrame(function() {
       updateStuff();
