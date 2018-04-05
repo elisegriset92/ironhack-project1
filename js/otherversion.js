@@ -144,8 +144,8 @@ function initGame() {
   };
 
   var wall_2 = {
-    x: canvas.width,
-    y: 0,
+    x: 0,
+    y: canvas.width,
     width: 25,
     height: canvas.height,
     drawWalls: function() {
@@ -265,7 +265,7 @@ function initGame() {
 
     // ____Draw Food is called_____//
 
-    if (food === null) {
+    if (food === null && snakeHead.score < 2) {
       food = createTaco(
         Math.floor(Math.random() * (canvas.width - 20)),
         Math.floor(Math.random() * (canvas.height - 20))
@@ -279,63 +279,55 @@ function initGame() {
       snakeHead.score += 1;
       $('.score').text(snakeHead.score + ' PTS');
 
-      if (snakeHead.score === 5) {
-        if (food === null) {
-          food = createLobster(
-            Math.floor(Math.random() * (canvas.width - 20)),
-            Math.floor(Math.random() * (canvas.height - 20))
-          );
-        }
+      if (food === null && snakeHead.score === 2) {
+        food = createLobster(
+          Math.floor(Math.random() * (canvas.width - 20)),
+          Math.floor(Math.random() * (canvas.height - 20))
+        );
         food.drawFood();
         snakeHead.level += 1;
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background2');
-      } else if (snakeHead.score === 10) {
-        if (food === null) {
-          food = createBurger(
-            Math.floor(Math.random() * (canvas.width - 20)),
-            Math.floor(Math.random() * (canvas.height - 20))
-          );
-        }
+      } else if (food === null && snakeHead.score === 4) {
+        food = createBurger(
+          Math.floor(Math.random() * (canvas.width - 20)),
+          Math.floor(Math.random() * (canvas.height - 20))
+        );
         food.drawFood();
         snakeHead.level += 1;
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background3');
-      } else if (snakeHead.score === 15) {
-        if (food === null) {
-          food = createPizza(
-            Math.floor(Math.random() * (canvas.width - 20)),
-            Math.floor(Math.random() * (canvas.height - 20))
-          );
-        }
+      } else if (food === null && snakeHead.score === 6) {
+        food = createPizza(
+          Math.floor(Math.random() * (canvas.width - 20)),
+          Math.floor(Math.random() * (canvas.height - 20))
+        );
         food.drawFood();
         snakeHead.level += 1;
         snakeHead.speed += 2;
         $('.level').text('LEVEL ' + snakeHead.level);
         $('.first-canvas').addClass('background4');
       }
-      // else {food.clearFood();
-      // }
     }
 
-    if (snakeHead.level === 2) {
+    if (snakeHead.level >= 2) {
       wall_1.drawWalls();
       wall_2.drawWalls();
     }
 
-    if (snakeHead.level === 3) {
-      wall_1.drawWalls();
-      wall_2.drawWalls();
-    }
-
-    if (snakeHead.level === 4) {
-      wall_1.drawWalls();
-      wall_2.drawWalls();
+    if (snakeHead.level >= 3) {
       wall_3.drawWalls();
       wall_4.drawWalls();
     }
+
+    // if (snakeHead.level >= 4) {
+    //   wall_1.drawWalls();
+    //   wall_2.drawWalls();
+    //   wall_3.drawWalls();
+    //   wall_4.drawWalls();
+    // }
 
     if (wallCollision()) {
       alert('Game over!');
