@@ -154,27 +154,27 @@ function initGame() {
     },
   };
 
-  // var wall_3 = {
-  //   x: 0,
-  //   y: 0,
-  //   width: canvas.width,
-  //   height: 25,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'white'), ctx.fill();
-  //   },
-  // };
+  var wall_3 = {
+    x: 0,
+    y: 0,
+    width: canvas.width,
+    height: 25,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'black'), ctx.fill();
+    },
+  };
 
-  // var wall_4 = {
-  //   x: 0,
-  //   y: canvas.height - 25,
-  //   width: canvas.width,
-  //   height: 25,
-  //   drawWalls: function() {
-  //     ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
-  //       'white'), ctx.fill();
-  //   },
-  // };
+  var wall_4 = {
+    x: 0,
+    y: canvas.height - 25,
+    width: canvas.width,
+    height: 25,
+    drawWalls: function() {
+      ctx.fillRect(this.x, this.y, this.width, this.height), (ctx.fillStyle =
+        'black'), ctx.fill();
+    },
+  };
 
   // ____Collision_____//
 
@@ -283,11 +283,6 @@ function initGame() {
       return;
     }
 
-    if (snakeHead.level > 1) {
-      wall_1.drawWalls();
-      wall_2.drawWalls();
-    }
-
     if (wallCollision()) {
       ctx.font = '150px Arial';
       ctx.fillText('YOU LOSE !', 100, canvas.height / 2);
@@ -351,6 +346,14 @@ function initGame() {
         $('.first-canvas').addClass('background4');
         $('.level').text('LEVEL ' + snakeHead.level);
       }
+    }
+
+    wall_1.drawWalls();
+    wall_2.drawWalls();
+
+    if (snakeHead.speed === 7 || snakeHead.speed === 9) {
+      wall_3.drawWalls();
+      wall_4.drawWalls();
     }
 
     requestAnimationFrame(function() {
