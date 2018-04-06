@@ -16,9 +16,6 @@ function initGame() {
   var win = new Audio('./bensound-ukulele.mp3');
   var lose = new Audio('./NFF-zomboid.wav');
 
-  var snakeImage = new Image();
-  snakeImage.src = './img/snake1.png';
-
   var snakeHead = {
     x: canvas.width / 2,
     y: canvas.height / 2,
@@ -56,7 +53,6 @@ function initGame() {
       }
     },
   };
-
   // ____Draw Food__TACO___//
 
   var foodImage1 = new Image();
