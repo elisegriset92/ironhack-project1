@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d');
 // _____________________________________Init Game____________________________________//
 
 function initGame() {
-  $('.btn').off();
+  // $('.btn').off();
   $('.btn').removeClass('btn-success');
   $('.btn').addClass('btn-clicked');
   $('.btn').text('Good Luck!');
@@ -284,6 +284,10 @@ function initGame() {
       ctx.font = '100px Arial';
       ctx.fillText('YEAHHH PIZZA !!!!', 100, canvas.height / 2);
       win.play();
+      // $('.btn').on();
+      $('.btn').addClass('btn-success');
+      $('.btn').removeClass('btn-clicked');
+      $('.btn').text('TRY AGAIN !');
       return;
     }
 
@@ -291,6 +295,10 @@ function initGame() {
       ctx.font = '150px Arial';
       ctx.fillText('YOU LOSE !', 100, canvas.height / 2);
       lose.play();
+      // $('.btn').on();
+      $('.btn').addClass('btn-success');
+      $('.btn').removeClass('btn-clicked');
+      $('.btn').text('PLAY AGAIN ?');
       return;
     }
 
