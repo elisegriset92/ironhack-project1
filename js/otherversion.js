@@ -12,6 +12,9 @@ function initGame() {
   // ____var for the game_____//
 
   var food = null;
+  var soundEat = new Audio('./NFF-rolling-b.wav');
+  var win = new Audio('./bensound-ukulele.mp3');
+  var lose = new Audio('./NFF-zomboid.wav');
 
   var snakeHead = {
     x: canvas.width / 2,
@@ -280,12 +283,14 @@ function initGame() {
     if (snakeHead.score === 16) {
       ctx.font = '100px Arial';
       ctx.fillText('YEAHHH PIZZA !!!!', 100, canvas.height / 2);
+      win.play();
       return;
     }
 
     if (wallCollision()) {
       ctx.font = '150px Arial';
       ctx.fillText('YOU LOSE !', 100, canvas.height / 2);
+      lose.play();
       return;
     }
 
@@ -300,6 +305,7 @@ function initGame() {
     food.drawFood();
 
     if (foodCollision()) {
+      soundEat.play();
       food.clearFood();
       food = null;
       snakeHead.score += 1;
